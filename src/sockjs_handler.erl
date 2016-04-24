@@ -220,7 +220,7 @@ extract_info(Req) ->
                                               {undefined, R1} -> {Acc, R1};
                                               {V, R1}         -> {[{H, V} | Acc], R1}
                                           end
-                                  end, {[], Req2},
+                                  end, {[], Req},
                                   ['referer','uuid','Content-type','isJson', 'x-client-ip', 'x-forwarded-for',
                                    'x-cluster-client-ip', 'via', 'x-real-ip']),
     {[{peername, Peer},
