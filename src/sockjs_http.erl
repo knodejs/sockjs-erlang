@@ -59,6 +59,7 @@ body_qs2({cowboy, Req}) ->
 -spec header(atom(), req()) -> {nonempty_string() | undefined, req()}.
 header(K, {cowboy, Req})->
     {H, Req2} = cowboy_req:header(K, Req),
+    io:format("header:~p~n",[H]),
     {V, Req3} = case H of
                     undefined ->
                         cowboy_req:header(atom_to_binary(K, utf8), Req2);
