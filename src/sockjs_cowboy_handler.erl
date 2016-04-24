@@ -22,6 +22,7 @@ init({_Any, http}, Req, Service) ->
     end.
 
 handle(Req, Service) ->
+    io:format("handle Reqs:~p~n",[Req]),
     {cowboy, Req3} = sockjs_handler:handle_req(Service, {cowboy, Req}),
     {ok, Req3, Service}.
 
@@ -32,7 +33,7 @@ terminate(_Reason, _Req, _Service) ->
 
 websocket_init(_TransportName, Req, Service = #service{logger = Logger}) ->
     Req0 = Logger(Service, {cowboy, Req}, websocket),
-    io:format("websocket_init Reqs:~p~n",[Req]),
+
     Service1 = Service#service{disconnect_delay = 5*60*1000},
 
     {Info, Req1} = sockjs_handler:extract_info(Req0),
@@ -47,6 +48,7 @@ websocket_init(_TransportName, Req, Service = #service{logger = Logger}) ->
     {ok, Req3, {RawWebsocket, SessionPid}}.
 
 websocket_handle({text, Data}, Req, {RawWebsocket, SessionPid} = S) ->
+    io:format("websocket_handle Reqs:~p~n",[Req]),
     case sockjs_ws_handler:received(RawWebsocket, SessionPid, Data) of
         ok       -> {ok, Req, S};
         shutdown -> {shutdown, Req, S}
