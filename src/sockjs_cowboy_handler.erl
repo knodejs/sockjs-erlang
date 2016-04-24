@@ -32,7 +32,7 @@ terminate(_Reason, _Req, _Service) ->
 
 websocket_init(_TransportName, Req, Service = #service{logger = Logger}) ->
     Req0 = Logger(Service, {cowboy, Req}, websocket),
-
+    io:format("websocket_init Reqs:~p~n",[Req]),
     Service1 = Service#service{disconnect_delay = 5*60*1000},
 
     {Info, Req1} = sockjs_handler:extract_info(Req0),
