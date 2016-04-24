@@ -39,7 +39,7 @@ body({cowboy, Req})       -> {ok, Body, Req1} = cowboy_req:body(Req),
 -spec body_qs(req()) -> {binary(), req()}.
 body_qs(Req) ->
     {H, Req1} =  header('content-type', Req),
-    io:format("Content-Type,~p~n",[H]),
+    %%io:format("Content-Type,~p~n",[H]),
     case H of
         H when H =:= "text/plain" orelse H =:= "" ->
             body(Req1);
@@ -59,9 +59,9 @@ body_qs2({cowboy, Req}) ->
 -spec header(atom(), req()) -> {nonempty_string() | undefined, req()}.
 header(K, {cowboy, Req})->
     {H, Req2} = cowboy_req:header(K, Req),
-    io:format("K:~p~n",[K]),
-    io:format("Req:~p~n",[Req]),
-    io:format("header:~p~n",[H]),
+    %%io:format("K:~p~n",[K]),
+    %%io:format("Req:~p~n",[Req]),
+    %%io:format("header:~p~n",[H]),
     {V, Req3} = case H of
                     undefined ->
                         cowboy_req:header(atom_to_binary(K, utf8), Req2);
