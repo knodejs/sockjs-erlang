@@ -39,6 +39,7 @@ body({cowboy, Req})       -> {ok, Body, Req1} = cowboy_req:body(Req),
 -spec body_qs(req()) -> {binary(), req()}.
 body_qs(Req) ->
     {H, Req1} =  header('content-type', Req),
+    io:format("Content-Type,~p~n",[H]),
     case H of
         H when H =:= "text/plain" orelse H =:= "" ->
             body(Req1);
