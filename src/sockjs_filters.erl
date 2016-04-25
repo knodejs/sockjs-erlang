@@ -38,7 +38,7 @@ h_no_cache(Req, Headers) ->
 
 -spec xhr_cors(req(), headers()) -> {headers(), req()}.
 xhr_cors(Req, Headers) ->
-    io:format("xhr_cors:~p~n",[Req]),
+    io:format("Headers:~p~n",[Headers]),
     {OriginH, Req1} = sockjs_http:header('origin', Req),
      Origin = case OriginH of
                   "null"    -> "*";
