@@ -215,7 +215,10 @@ extract_info(Req) ->
     {Peer, Req0}    = sockjs_http:peername(Req),
     {Sock, Req1}    = sockjs_http:sockname(Req0),
     {Path, Req2}    = sockjs_http:path(Req1),
-    %%io:format("Reqs:~p~n",[Req]),
+    io:format("Reqs:~p~n",[Req]),
+    io:format("Req0:~p~n",[Req0]),
+    io:format("Req1:~p~n",[Req1]),
+    io:format("Req2:~p~n",[Req2]),
     {Headers, Req3} = lists:foldl(fun (H, {Acc, R0}) ->
                                           case sockjs_http:header(H, R0) of
                                               {undefined, R1} -> {Acc, R1};
@@ -224,6 +227,7 @@ extract_info(Req) ->
                                   end, {[], Req2},
                                   ['referer','uuid','Content-type','isJson', 'x-client-ip', 'x-forwarded-for',
                                    'x-cluster-client-ip', 'via', 'x-real-ip']),
+    io:format("headers:~p~n",[headers]),
     {[{peername, Peer},
       {sockname, Sock},
       {path, Path},
