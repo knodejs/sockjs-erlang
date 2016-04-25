@@ -13,6 +13,7 @@
 
 -spec init_state(binary(), callback(), any(), list(tuple())) -> service().
 init_state(Prefix, Callback, State, Options) ->
+    io:format("Options:~p~n",[Options]),
     #service{prefix = binary_to_list(Prefix),
              callback = Callback,
              state = State,
