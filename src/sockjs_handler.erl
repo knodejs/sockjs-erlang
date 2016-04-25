@@ -227,7 +227,7 @@ extract_info(Req) ->
                                   end, {[], Req2},
                                   ['referer','uuid','Content-type','isJson', 'x-client-ip', 'x-forwarded-for',
                                    'x-cluster-client-ip', 'via', 'x-real-ip']),
-    io:format("headers:~p~n",[headers]),
+    io:format("headers:~p~n",[Headers]),
     {[{peername, Peer},
       {sockname, Sock},
       {path, Path},
